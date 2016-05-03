@@ -16,6 +16,8 @@ import org.junit.runners.Parameterized;
 public class LogAnalyserParamTest {
 	private LogAnalyser logAnal;
 
+	private FileExtManStub fileExtMan;
+
 	@Parameterized.Parameter
 	public String fName;
 
@@ -29,11 +31,14 @@ public class LogAnalyserParamTest {
 
 	@Before
 	public void setUp() {
+		fileExtMan = new FileExtManStub();
 		logAnal = new LogAnalyser();
+		logAnal.setFileExtMan(fileExtMan);
 	}
 
 	@Test
 	public void test() {
+		fileExtMan.setWillReturn(exp);
 		Assert.assertEquals(exp, logAnal.isValidLogFileName(fName));
 	}
 }
