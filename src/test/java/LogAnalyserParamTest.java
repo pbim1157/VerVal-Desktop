@@ -33,7 +33,7 @@ public class LogAnalyserParamTest {
 	public void setUp() {
 		fileExtMan = new FileExtManStub();
 		logAnal = new LogAnalyser();
-		logAnal.setFileExtMan(fileExtMan);
+		//logAnal.setFileExtMan(fileExtMan);
 	}
 
 	@Test
