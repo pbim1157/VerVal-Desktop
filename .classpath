@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="D:/hatodik felev/Verifikacio es validacio/Labor/VerVal-Desktop/src/test/resources/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="D:/hatodik felev/Verifikacio es validacio/Labor/VerVal-Desktop/src/test/resources/mockito-all-1.10.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

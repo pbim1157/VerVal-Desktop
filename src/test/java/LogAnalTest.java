@@ -3,10 +3,12 @@ package test.java;
 import static org.junit.Assert.*;
 
 import org.junit.*;
+import org.mockito.Mockito;
 
 import main.java.FileExtMan;
 import main.java.FileExtManFactory;
 import main.java.LogAnalyser;
+import main.java.WebService;
 
 public class LogAnalTest {
 
@@ -16,6 +18,8 @@ public class LogAnalTest {
 
 	private FileExtManStub fileExtMan;
 
+	private WebService webServ;
+
 	@Before
 	public void setUp() {
 		fileExtMan = new FileExtManStub();
@@ -23,6 +27,7 @@ public class LogAnalTest {
 		// logAnal.setFileExtMan(fileExtMan);
 		logAnal = new TestLogAnal(fileExtMan);
 		FileExtManFactory.getInstance().setFileExtMan(fileExtMan);
+		webServ = new ManualWebService();
 	}
 
 	@After
@@ -58,6 +63,21 @@ public class LogAnalTest {
 	public void IsValidLogFileNameTestable_Valid_ReturnTrue() {
 		fileExtMan.setWillReturn(true);
 		assertEquals(true, logAnal.isValidLogFileName(""));
+	}
+
+	@Test
+	public void isValiedLogFileName_FileNameTooShort_CallsWebService() {
+		logAnal.isValidLogFileName("12");
+		assertEquals(true, webServ.getLastError());
+	}
+
+	@Test
+	public void isValiedLogFileNameMock_FileNameTooShort_CallsWebService() {
+		WebService mockedWebService = Mockito.mock(WebService.class);
+		logAnal.setWebServ(mockedWebService);
+		logAnal.isValidLogFileName("12");
+		Mockito.verify(mockedWebService, Mockito.times(2)).logError("12 file name is too short.");
+
 	}
 
 }
